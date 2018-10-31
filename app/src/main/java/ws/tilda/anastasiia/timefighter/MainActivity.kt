@@ -1,6 +1,7 @@
 package ws.tilda.anastasiia.timefighter
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.TextView
@@ -10,6 +11,10 @@ class MainActivity : AppCompatActivity() {
     internal lateinit var gameScoreTextView: TextView
     internal lateinit var timeLeftTextView: TextView
     internal var score = 0
+    internal var gameStarted = false
+    internal lateinit var countDownTimer: CountDownTimer
+    internal val initialCountDown: Long = 60000 // the length of the countdown in milliseconds
+    internal val countDownInterval: Long = 1000 // the rate at which the countdown will increment in milliseconds
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,10 +22,10 @@ class MainActivity : AppCompatActivity() {
 
         tapMeButton = findViewById(R.id.tap_me_button)
         gameScoreTextView = findViewById(R.id.game_score_text_view)
+        gameScoreTextView.text = getString(R.string.score_text_view_name, score.toString())
         timeLeftTextView = findViewById(R.id.time_left_text_view)
 
-        tapMeButton.setOnClickListener{
-            view ->
+        tapMeButton.setOnClickListener { view ->
             incrementScore()
         }
     }
