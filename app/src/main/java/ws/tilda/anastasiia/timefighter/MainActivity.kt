@@ -30,6 +30,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun resetGame() {
+        score = 0
+        gameScoreTextView.text = getString(R.string.score_text_view_name, score.toString())
+        val initialTimeLeft = initialCountDown/1000
+        timeLeftTextView.text = getString(R.string.time_left_text_view_name, initialTimeLeft.toString())
+    }
+
     private fun incrementScore() {
         score += 1
         val newScore = getString(R.string.score_text_view_name, score.toString())
