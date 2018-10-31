@@ -118,6 +118,9 @@ class MainActivity : AppCompatActivity() {
         score += 1
         val newScore = getString(R.string.score_text_view_name, score.toString())
         gameScoreTextView.text = newScore
+        val blinkAnimation = AnimationUtils.loadAnimation(this, R.anim.blink)
+        gameScoreTextView.startAnimation(blinkAnimation)
+
     }
 
 
