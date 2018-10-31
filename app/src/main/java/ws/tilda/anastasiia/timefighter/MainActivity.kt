@@ -2,6 +2,7 @@ package ws.tilda.anastasiia.timefighter
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
@@ -91,7 +92,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showInfo() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val dialogTitle = getString(R.string.about_title, BuildConfig.VERSION_NAME)
+        val dialogMessage = getString(R.string.about_message)
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder
+                .setTitle(dialogTitle)
+                .setMessage(dialogMessage)
+                .create()
+                .show()
     }
 
     private fun resetGame() {
