@@ -18,6 +18,12 @@ class MainActivity : AppCompatActivity() {
     internal val initialCountDown: Long = 60000 // the length of the countdown in milliseconds
     internal val countDownInterval: Long = 1000 // the rate at which the countdown will increment in milliseconds
     internal val TAG = MainActivity::class.java.simpleName
+    internal var timeLeftOntimer: Long = 60000
+
+    companion object {
+        private val SCORE_KEY = "SCORE KEY"
+        private val TIME_LEFT_KEY = "TIME_LEFT_KEY"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +48,7 @@ class MainActivity : AppCompatActivity() {
 
         countDownTimer = object : CountDownTimer(initialCountDown, countDownInterval) {
             override fun onTick(millisUntilFinished: Long) {
+                timeLeftOntimer = millisUntilFinished
                 val timeLeft = millisUntilFinished / 1000
                 timeLeftTextView.text = getString(R.string.time_left_text_view_name, timeLeft.toString())
             }
