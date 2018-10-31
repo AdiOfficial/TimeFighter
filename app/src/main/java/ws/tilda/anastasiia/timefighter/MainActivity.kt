@@ -48,7 +48,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun restoreGame() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        gameScoreTextView.text = getString(R.string.score_text_view_name, score.toString())
+        val restoredTimeInSeconds = timeLeftOntimer / 1000
+        timeLeftTextView.text = getString(R.string.time_left_text_view_name, restoredTimeInSeconds.toString())
+
+        countDownTimer = object : CountDownTimer(timeLeftOntimer, countDownInterval) {
+            override fun onTick(millisUntilFinished: Long) {
+                timeLeftOntimer = millisUntilFinished
+                var timeLeftInSeconds = millisUntilFinished / 1000
+                timeLeftTextView.text = getString(R.string.time_left_text_view_name, timeLeftInSeconds.toString())
+            }
+
+            override fun onFinish() {
+                endGame()
+            }
+        }
+
+        countDownTimer.start()
+        gameStarted = true
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -76,8 +93,8 @@ class MainActivity : AppCompatActivity() {
         countDownTimer = object : CountDownTimer(initialCountDown, countDownInterval) {
             override fun onTick(millisUntilFinished: Long) {
                 timeLeftOntimer = millisUntilFinished
-                val timeLeft = millisUntilFinished / 1000
-                timeLeftTextView.text = getString(R.string.time_left_text_view_name, timeLeft.toString())
+                val timeLeftInSeconds = millisUntilFinished / 1000
+                timeLeftTextView.text = getString(R.string.time_left_text_view_name, timeLeftInSeconds.toString())
             }
 
             override fun onFinish() {
