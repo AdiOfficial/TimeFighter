@@ -52,20 +52,8 @@ class MainActivity : AppCompatActivity() {
         val restoredTimeInSeconds = timeLeftOntimer / 1000
         timeLeftTextView.text = getString(R.string.time_left_text_view_name, restoredTimeInSeconds.toString())
 
-        countDownTimer = object : CountDownTimer(timeLeftOntimer, countDownInterval) {
-            override fun onTick(millisUntilFinished: Long) {
-                timeLeftOntimer = millisUntilFinished
-                var timeLeftInSeconds = millisUntilFinished / 1000
-                timeLeftTextView.text = getString(R.string.time_left_text_view_name, timeLeftInSeconds.toString())
-            }
-
-            override fun onFinish() {
-                endGame()
-            }
-        }
-
-        countDownTimer.start()
-        gameStarted = true
+        setCountDownTimer(timeLeftOntimer, countDownInterval)
+        startGame()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -90,7 +78,12 @@ class MainActivity : AppCompatActivity() {
         val initialTimeLeft = initialCountDown / 1000
         timeLeftTextView.text = getString(R.string.time_left_text_view_name, initialTimeLeft.toString())
 
-        countDownTimer = object : CountDownTimer(initialCountDown, countDownInterval) {
+        setCountDownTimer(initialCountDown, countDownInterval)
+        gameStarted = false
+    }
+
+    private fun setCountDownTimer(countDown: Long, interval: Long) {
+        countDownTimer = object : CountDownTimer(countDown, interval) {
             override fun onTick(millisUntilFinished: Long) {
                 timeLeftOntimer = millisUntilFinished
                 val timeLeftInSeconds = millisUntilFinished / 1000
@@ -101,7 +94,6 @@ class MainActivity : AppCompatActivity() {
                 endGame()
             }
         }
-        gameStarted = false
     }
 
     private fun startGame() {
