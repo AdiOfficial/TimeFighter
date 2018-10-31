@@ -33,11 +33,22 @@ class MainActivity : AppCompatActivity() {
         tapMeButton = findViewById(R.id.tap_me_button)
         gameScoreTextView = findViewById(R.id.game_score_text_view)
         timeLeftTextView = findViewById(R.id.time_left_text_view)
-        resetGame()
+
+        if (savedInstanceState != null) {
+            score = savedInstanceState.getInt(SCORE_KEY)
+            timeLeftOntimer = savedInstanceState.getLong(TIME_LEFT_KEY)
+            restoreGame()
+        } else {
+            resetGame()
+        }
 
         tapMeButton.setOnClickListener { view ->
             incrementScore()
         }
+    }
+
+    private fun restoreGame() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
