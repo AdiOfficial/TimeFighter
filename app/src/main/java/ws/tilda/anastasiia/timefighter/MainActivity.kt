@@ -33,8 +33,20 @@ class MainActivity : AppCompatActivity() {
     private fun resetGame() {
         score = 0
         gameScoreTextView.text = getString(R.string.score_text_view_name, score.toString())
-        val initialTimeLeft = initialCountDown/1000
+        val initialTimeLeft = initialCountDown / 1000
         timeLeftTextView.text = getString(R.string.time_left_text_view_name, initialTimeLeft.toString())
+
+        countDownTimer = object : CountDownTimer(initialCountDown, countDownInterval) {
+            override fun onTick(millisUntilFinished: Long) {
+                val timeLeft = millisUntilFinished / 1000
+                timeLeftTextView.text = getString(R.string.time_left_text_view_name, timeLeft.toString())
+            }
+
+            override fun onFinish() {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        }
+        gameStarted = false
     }
 
     private fun incrementScore() {
@@ -42,6 +54,4 @@ class MainActivity : AppCompatActivity() {
         val newScore = getString(R.string.score_text_view_name, score.toString())
         gameScoreTextView.text = newScore
     }
-
-
 }
