@@ -40,6 +40,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putInt(SCORE_KEY, score)
+        outState.putLong(TIME_LEFT_KEY, timeLeftOntimer)
+        countDownTimer.cancel()
+        Log.d(TAG, "onSavedInstanceState: Saving Score: $score & Time Left: $timeLeftOntimer")
+
+    }
+
     private fun resetGame() {
         score = 0
         gameScoreTextView.text = getString(R.string.score_text_view_name, score.toString())
