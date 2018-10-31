@@ -5,6 +5,7 @@ import android.os.CountDownTimer
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
     internal lateinit var tapMeButton: Button
@@ -43,10 +44,22 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                endGame()
             }
         }
         gameStarted = false
+    }
+
+    private fun startGame() {
+        countDownTimer.start()
+        gameStarted = true
+    }
+
+    private fun endGame() {
+        Toast.makeText(this,
+                getString(R.string.game_over_message, score.toString()),
+                Toast.LENGTH_SHORT).show()
+        resetGame()
     }
 
     private fun incrementScore() {
@@ -58,8 +71,5 @@ class MainActivity : AppCompatActivity() {
         gameScoreTextView.text = newScore
     }
 
-    private fun startGame() {
-        countDownTimer.start()
-        gameStarted = true
-    }
+
 }
