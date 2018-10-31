@@ -50,8 +50,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun incrementScore() {
+        if (!gameStarted) {
+            startGame()
+        }
         score += 1
         val newScore = getString(R.string.score_text_view_name, score.toString())
         gameScoreTextView.text = newScore
+    }
+
+    private fun startGame() {
+        countDownTimer.start()
+        gameStarted = true
     }
 }
